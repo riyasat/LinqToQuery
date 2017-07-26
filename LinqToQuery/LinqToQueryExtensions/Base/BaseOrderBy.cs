@@ -1,3 +1,6 @@
+//Author:Riyasat Ali 
+// http://www.riytechnologies.com:
+//Linkedin: https://www.linkedin.com/in/riyasat-ali/
 using System;
 using System.Linq.Expressions;
 using LinqToQueryExtensions.Order;

@@ -1,4 +1,7 @@
-﻿using System.Data.SqlClient;
+﻿//Author:Riyasat Ali 
+// http://www.riytechnologies.com:
+//Linkedin: https://www.linkedin.com/in/riyasat-ali/
+using System.Data.SqlClient;
 using System.Dynamic;
 using System.Text;
 using System.Threading;

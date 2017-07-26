@@ -1,3 +1,6 @@
+//Author:Riyasat Ali 
+// http://www.riytechnologies.com:
+//Linkedin: https://www.linkedin.com/in/riyasat-ali/
 using System.Linq;
 using LinqToQueryExtensions.Utilities.Enums;
 using LinqToQueryExtensions.Where;

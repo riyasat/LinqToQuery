@@ -1,4 +1,7 @@
-﻿using System;
+﻿//Author:Riyasat Ali 
+// http://www.riytechnologies.com:
+//Linkedin: https://www.linkedin.com/in/riyasat-ali/
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq.Expressions;

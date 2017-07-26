@@ -1,4 +1,7 @@
-﻿using System.Collections.Generic;
+﻿//Author:Riyasat Ali 
+// http://www.riytechnologies.com:
+//Linkedin: https://www.linkedin.com/in/riyasat-ali/
+using System.Collections.Generic;
 using LinqToQueryExtensions.Utilities.Enums;
 
 namespace LinqToQueryExtensions.Columns
