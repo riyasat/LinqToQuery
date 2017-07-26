@@ -4,9 +4,9 @@
 
 using System;
 using System.Text.RegularExpressions;
-using Volvo.SDE.CPO.LinqToSql.Utilities.Enums;
+using LinqToQueryExtensions.Utilities.Enums;
 
-namespace Volvo.SDE.CPO.LinqToSql.Columns
+namespace LinqToQueryExtensions.Columns
 {
 	internal static class ColumnExtension
 	{
