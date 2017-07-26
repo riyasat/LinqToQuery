@@ -1,6 +1,4 @@
-<snippet>
-  <content><![CDATA[
-# ${1:Project Name}
+# Linq To SQL Queries
 
 The aim of the project is to create SQL queries via LINQ. Specifically for Dapper lovers.
 
@@ -165,12 +163,13 @@ Riyasat Ali - https://www.linkedin.com/in/riyasat-ali/
 ### Limitations
 This project doesn't cover more complex scenarios but still you can use it for many simple to mid level complex queries. If you have more ideas please feel free to fork and please update in this repository. Thanks
 ## License
-### Permissions
-*Any one can use this for any kind of project(s)*
-### Responsibility
-*Coder / User has their own responsibility to produce right code*
+Copyright 2017 Riyasat Ali and contributors
+
+Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License. You may obtain a copy of the License at
+
+http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions and limitations under the License.
+
 ## Conditions
 *Add Credits to me in your project*
-
-]]></content>
-</snippet>
