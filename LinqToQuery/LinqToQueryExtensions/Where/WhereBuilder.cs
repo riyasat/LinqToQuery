@@ -45,7 +45,7 @@ namespace LinqToQueryExtensions.Where
 			{
 				column.TableName = string.IsNullOrWhiteSpace(tableAttribute.Schema)
 					? tableAttribute.Name
-					: $"{tableAttribute.Name}.{tableAttribute.Name}";
+					: $"{tableAttribute.Schema}.{tableAttribute.Name}";
 			}
 			if (columnAttribute != null)
 			{
