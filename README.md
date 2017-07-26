@@ -162,7 +162,8 @@ conn.Delete<Supplier>()
 ## Credits
 
 Riyasat Ali - https://www.linkedin.com/in/riyasat-ali/
-
+### Limitations
+This project doesn't cover more complex scenarios but still you can use it for many simple to mid level complex queries. If you have more ideas please feel free to fork and please update in this repository. Thanks
 ## License
 ### Permissions
 *Any one can use this for any kind of project(s)*
