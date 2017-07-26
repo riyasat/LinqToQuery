@@ -1,11 +1,12 @@
 //Author:Riyasat Ali 
 // http://www.riytechnologies.com:
 //Linkedin: https://www.linkedin.com/in/riyasat-ali/
+
 using System;
 using System.Text.RegularExpressions;
-using LinqToQueryExtensions.Utilities.Enums;
+using Volvo.SDE.CPO.LinqToSql.Utilities.Enums;
 
-namespace LinqToQueryExtensions.Columns
+namespace Volvo.SDE.CPO.LinqToSql.Columns
 {
 	internal static class ColumnExtension
 	{
@@ -36,30 +37,40 @@ namespace LinqToQueryExtensions.Columns
 		}
 		internal static string GetOrderBy(this Column type)
 		{
-			return $" {type.TableName}.{type.ColumnName} {type.OrderBy.ToString()}";
+			var tableName = string.IsNullOrWhiteSpace(type.TableAlias)
+				? type.TableName
+				: type.TableAlias;
+			return $" {tableName}.{type.ColumnName} {type.OrderBy.ToString()}";
 		}
 		internal static string GetSetValue(this Column type)
 		{
-			return $" {type.TableName}.{type.ColumnName} = @UP{type.ColumnName}";
+			var tableName = string.IsNullOrWhiteSpace(type.TableAlias)
+				? type.TableName
+				: type.TableAlias;
+			return $" {tableName}.{type.ColumnName} = @UP{type.ColumnName}";
 		}
 		private static string GetOperator(this Column type)
 		{
+			var tableName = string.IsNullOrWhiteSpace(type.TableAlias)
+								? type.TableName
+								: type.TableAlias;
+
 			switch (type.Condition)
 			{
 				case ConditionTypes.CONTAINS:
-					return $"{type.TableName}.{type.ColumnName} LIKE '%'+@{type.ColumnName}+'%'";
+					return $"{tableName}.{type.ColumnName} LIKE '%'+@{type.ColumnName}+'%'";
 				case ConditionTypes.NOTCONTAINS:
-					return $"{type.TableName}.{type.ColumnName} NOT LIKE '%'+@{type.ColumnName}+'%'";
+					return $"{tableName}.{type.ColumnName} NOT LIKE '%'+@{type.ColumnName}+'%'";
 				case ConditionTypes.NOTEQUALSTO:
-					return $"{type.TableName}.{type.ColumnName} != @{type.ColumnName}";
+					return $"{tableName}.{type.ColumnName} != @{type.ColumnName}";
 				case ConditionTypes.GREATERTHEN:
-					return $"{type.TableName}.{type.ColumnName} > @{type.ColumnName}";
+					return $"{tableName}.{type.ColumnName} > @{type.ColumnName}";
 				case ConditionTypes.GREATERTHENEQUALSTO:
-					return $"{type.TableName}.{type.ColumnName} >= @{type.ColumnName}";
+					return $"{tableName}.{type.ColumnName} >= @{type.ColumnName}";
 				case ConditionTypes.LESSTHEN:
-					return $"{type.TableName}.{type.ColumnName} < @{type.ColumnName}";
+					return $"{tableName}.{type.ColumnName} < @{type.ColumnName}";
 				case ConditionTypes.LESSTHENEQUALSTO:
-					return $"{type.TableName}.{type.ColumnName} <= @{type.ColumnName}";
+					return $"{tableName}.{type.ColumnName} <= @{type.ColumnName}";
 				case ConditionTypes.IN:
 					string[] inValues = type.Value as string[];
 					var inVariableName = "";
@@ -73,7 +84,7 @@ namespace LinqToQueryExtensions.Columns
 							}
 							inVariableName += $"@{type.ColumnName}{i}";
 						}
-						return $"{type.TableName}.{type.ColumnName} IN ({inVariableName})";
+						return $"{tableName}.{type.ColumnName} IN ({inVariableName})";
 					}
 					return "";
 				case ConditionTypes.NOTIN:
@@ -89,11 +100,11 @@ namespace LinqToQueryExtensions.Columns
 							}
 							variableName += $"@{type.ColumnName}{i}";
 						}
-						return $"{type.TableName}.{type.ColumnName} NOT IN ({variableName})";
+						return $"{tableName}.{type.ColumnName} NOT IN ({variableName})";
 					}
 					return "";
 				default:
-					return $"{type.TableName}.{type.ColumnName} = @{type.ColumnName}";
+					return $"{tableName}.{type.ColumnName} = @{type.ColumnName}";
 			}
 		}
 	}
