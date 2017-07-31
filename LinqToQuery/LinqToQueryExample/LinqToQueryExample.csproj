@@ -4,15 +4,17 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{A542B760-C9F9-4FDF-BB2B-D7476B4A85EB}</ProjectGuid>
-    <OutputType>Library</OutputType>
+    <ProjectGuid>{1BB15CAB-2523-4661-A414-7667F0610718}</ProjectGuid>
+    <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>LinqToQueryExtensions</RootNamespace>
-    <AssemblyName>LinqToQueryExtensions</AssemblyName>
+    <RootNamespace>LinqToQueryExample</RootNamespace>
+    <AssemblyName>LinqToQueryExample</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -22,6 +24,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -45,33 +48,21 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Base\BaseJoin.cs" />
-    <Compile Include="Base\BaseOrderBy.cs" />
-    <Compile Include="Base\BaseSelect.cs" />
-    <Compile Include="Base\BaseUpdate.cs" />
-    <Compile Include="Base\BaseWhere.cs" />
-    <Compile Include="Columns\Column.cs" />
-    <Compile Include="Columns\ColumnExtension.cs" />
-    <Compile Include="Delete\DeleteBuilder.cs" />
-    <Compile Include="Insert\InsertBuilder.cs" />
-    <Compile Include="Join\JoinBuilder.cs" />
-    <Compile Include="LinqToQuery.cs" />
-    <Compile Include="Order\OrderByBuilder.cs" />
+    <Compile Include="Entities\OrderItem.cs" />
+    <Compile Include="Entities\Product.cs" />
+    <Compile Include="Entities\Supplier.cs" />
+    <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Select\SelectBuilder.cs" />
-    <Compile Include="Update\UpdateBuilder.cs" />
-    <Compile Include="Utilities\Attributes\IdentityAttribute.cs" />
-    <Compile Include="Utilities\Attributes\IgnoreAttribute.cs" />
-    <Compile Include="Utilities\Enums\AggregationMethods.cs" />
-    <Compile Include="Utilities\Enums\ConditionTypes.cs" />
-    <Compile Include="Utilities\Enums\JoinTypes.cs" />
-    <Compile Include="Utilities\Enums\OrderByDirection.cs" />
-    <Compile Include="Utilities\ExpressionExtensions.cs" />
-    <Compile Include="Where\OperatorBuilder.cs" />
-    <Compile Include="Where\WhereBuilder.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="App.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\LinqToQueryExtensions\LinqToQueryExtensions.csproj">
+      <Project>{a542b760-c9f9-4fdf-bb2b-d7476b4a85eb}</Project>
+      <Name>LinqToQueryExtensions</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -10,6 +10,7 @@ using System.Reflection;
 using LinqToQueryExtensions.Columns;
 using LinqToQueryExtensions.Utilities;
 using LinqToQueryExtensions.Utilities.Attributes;
+using LinqToQueryExtensions.Utilities.Enums;
 
 namespace LinqToQueryExtensions.Base
 {
@@ -50,6 +51,193 @@ namespace LinqToQueryExtensions.Base
 			Columns.Add(column);
 			return this;
 		}
+		public BaseSelect<TModel> Add<TJoin>(Expression<Func<TJoin, object>> expression, Expression<Func<TModel, object>> expressionToMap)
+		{
+			var colName = expression.GetMemberInfo();
+			var colAlias = expressionToMap.GetMemberInfo();
+			var column = GenerateSelectColumn<TJoin>(colName);
+			column.ColumnAlias = colAlias;
+			Columns.Add(column);
+			return this;
+		}
+		public BaseSelect<TModel> Add<TJoin>(Expression<Func<TJoin, object>> expression, string columnAlias)
+		{
+			var colName = expression.GetMemberInfo();
+			var colAlias = columnAlias;
+			var column = GenerateSelectColumn<TJoin>(colName);
+			column.ColumnAlias = colAlias;
+			Columns.Add(column);
+			return this;
+		}
+
+		#region Aggregate Functions
+
+		private bool isValidNumericValue(object value)
+		{
+			if (value == null) 
+				throw new Exception("Aggregated method can only work with numeric data");
+
+			switch (value.ToString().ToLower())
+			{
+				case "int":
+				case "decimel":
+				case "float":
+				case "int64":
+				case "int32":
+					return true;
+
+				default:
+					throw new Exception("Aggregated method can only work with numeric data");
+			}
+			
+
+		}
+
+		public BaseSelect<TModel> Sum<TJoin>(Expression<Func<TJoin, object>> expression)
+		{
+			var colName = expression.GetMemberInfo();
+
+			var value = expression.GetMemberType(colName);
+
+			if (isValidNumericValue(value))
+			{
+				var column = GenerateSelectColumn<TJoin>(colName);
+				column.AggregationMethod = AggregationMethods.SUM;
+				Columns.Add(column);
+			}
+			return this;
+		}
+
+
+		public BaseSelect<TModel> Sum(Expression<Func<TModel, object>> expression)
+		{
+			var colName = expression.GetMemberInfo();
+
+			var value = expression.GetMemberType(colName);
+
+			if (isValidNumericValue(value))
+			{
+				var column = GenerateSelectColumn<TModel>(colName);
+				column.AggregationMethod = AggregationMethods.SUM;
+				Columns.Add(column);
+			}
+
+			return this;
+		}
+		public BaseSelect<TModel> Min<TJoin>(Expression<Func<TJoin, object>> expression)
+		{
+			var colName = expression.GetMemberInfo();
+			var value = ExpressionExtensions.GetAttributeValue<TJoin, object>(colName);
+
+			if (isValidNumericValue(value))
+			{
+				var column = GenerateSelectColumn<TJoin>(colName);
+				column.AggregationMethod = AggregationMethods.MIN;
+				Columns.Add(column);
+			}
+			return this;
+		}
+		public BaseSelect<TModel> Min(Expression<Func<TModel, object>> expression)
+		{
+			var colName = expression.GetMemberInfo();
+
+			var value = expression.GetMemberType(colName);
+
+			if (isValidNumericValue(value))
+			{
+				var column = GenerateSelectColumn<TModel>(colName);
+				column.AggregationMethod = AggregationMethods.MIN;
+				Columns.Add(column);
+			}
+			return this;
+		}
+
+		public BaseSelect<TModel> Max<TJoin>(Expression<Func<TJoin, object>> expression)
+		{
+			var colName = expression.GetMemberInfo();
+
+			var value = ExpressionExtensions.GetAttributeValue<TJoin, object>(colName);
+
+			if (isValidNumericValue(value))
+			{
+				var column = GenerateSelectColumn<TJoin>(colName);
+				column.AggregationMethod = AggregationMethods.MAX;
+				Columns.Add(column);
+			}
+			return this;
+		}
+		public BaseSelect<TModel> Max(Expression<Func<TModel, object>> expression)
+		{
+			var colName = expression.GetMemberInfo();
+
+			var value = expression.GetMemberType(colName);
+
+			if (isValidNumericValue(value))
+			{
+				var column = GenerateSelectColumn<TModel>(colName);
+				column.AggregationMethod = AggregationMethods.MAX;
+				Columns.Add(column);
+			}
+			return this;
+		}
+		public BaseSelect<TModel> Count<TJoin>(Expression<Func<TJoin, object>> expression)
+		{
+			var colName = expression.GetMemberInfo();
+
+			var value = ExpressionExtensions.GetAttributeValue<TJoin, object>(colName);
+
+			if (isValidNumericValue(value))
+			{
+				var column = GenerateSelectColumn<TJoin>(colName);
+				column.AggregationMethod = AggregationMethods.COUNT;
+				Columns.Add(column);
+			}
+			return this;
+		}
+		public BaseSelect<TModel> Count(Expression<Func<TModel, object>> expression)
+		{
+			var colName = expression.GetMemberInfo();
+
+			var value = expression.GetMemberType(colName);
+
+			if (isValidNumericValue(value))
+			{
+				var column = GenerateSelectColumn<TModel>(colName);
+				column.AggregationMethod = AggregationMethods.COUNT;
+				Columns.Add(column);
+			}
+			return this;
+		}
+		public BaseSelect<TModel> Avg<TJoin>(Expression<Func<TJoin, object>> expression)
+		{
+			var colName = expression.GetMemberInfo();
+
+			var value = ExpressionExtensions.GetAttributeValue<TJoin, object>(colName);
+
+			if (isValidNumericValue(value))
+			{
+				var column = GenerateSelectColumn<TJoin>(colName);
+				column.AggregationMethod = AggregationMethods.AVG;
+				Columns.Add(column);
+			}
+			return this;
+		}
+		public BaseSelect<TModel> Avg(Expression<Func<TModel, object>> expression)
+		{
+			var colName = expression.GetMemberInfo();
+			var value = expression.GetMemberType(colName);
+
+			if (isValidNumericValue(value))
+			{
+				var column = GenerateSelectColumn<TModel>(colName);
+				column.AggregationMethod = AggregationMethods.AVG;
+				Columns.Add(column);
+			}
+			return this;
+		}
+		#endregion
+
+
 
 		private Column GenerateSelectColumn<TJoin>(string colName)
 		{

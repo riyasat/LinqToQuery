@@ -24,6 +24,7 @@ namespace LinqToQueryExtensions.Columns
 		public string TableName { get; internal set; }
 		public string TableAlias { get; set; }
 		public string Operator { get; set; }
+		public AggregationMethods AggregationMethod { get; set; }
 		public ConditionTypes Condition { get; set; }
 		public JoinTypes JoinType { get; set; }
 		public OrderByDirection OrderBy { get; set; }

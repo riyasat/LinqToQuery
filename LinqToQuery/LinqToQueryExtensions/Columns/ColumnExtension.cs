@@ -13,6 +13,20 @@ namespace LinqToQueryExtensions.Columns
 
 		internal static string GetSelect(this Column type)
 		{
+			switch (type.AggregationMethod)
+			{
+				case AggregationMethods.SUM:
+					return $"SUM({type.TableAlias}.{type.ColumnName})";
+				case AggregationMethods.MIN:
+					return $"MIN({type.TableAlias}.{type.ColumnName})";
+				case AggregationMethods.MAX:
+					return $"MAX({type.TableAlias}.{type.ColumnName})";
+				case AggregationMethods.AVG:
+					return $"AVG({type.TableAlias}.{type.ColumnName})";
+				case AggregationMethods.COUNT:
+					return $"COUNT({type.TableAlias}.{type.ColumnName})";
+			}
+
 			if (string.IsNullOrWhiteSpace(type.ColumnAlias))
 			{
 				return $" {type.TableAlias}.{type.ColumnName}";

@@ -92,5 +92,14 @@ namespace LinqToQueryExtensions.Utilities
 
 			return property.GetCustomAttribute(typeof(TType));
 		}
+		public static object GetMemberType<TModel>(this Expression<Func<TModel, object>> expression,string colName)
+		{
+			var model = typeof(TModel);
+
+			var property = model.GetProperty(colName);
+			if (property == null) return null;
+
+			return property.PropertyType.Name;
+		}
 	}
 }
