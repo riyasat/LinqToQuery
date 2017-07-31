@@ -15,7 +15,7 @@ namespace LinqToQueryExample
 	{
 		static void Main(string[] args)
 		{
-			var conn = new SqlConnection("Server=SESDEW10265304;Database=SampleDatabase;Trusted_Connection=True;");
+			var conn = new SqlConnection("Server=[YourServerName];Database=SampleDatabase;Trusted_Connection=True;");
 			//conn.Insert().Entity(new Supplier
 			//	{
 			//		City = "Test",
