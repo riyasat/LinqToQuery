@@ -15,7 +15,7 @@ namespace LinqToQueryExample
 	{
 		static void Main(string[] args)
 		{
-			var conn = new SqlConnection("Server=[YourServer];Database=SampleDatabase;Trusted_Connection=True;");
+			var conn = new SqlConnection("Server=[YourServerName];Database=SampleDatabase;Trusted_Connection=True;");
 			//conn.Insert().Entity(new Supplier
 			//	{
 			//		City = "Test",
@@ -24,9 +24,7 @@ namespace LinqToQueryExample
 			//		;
 
 			var result = conn.Select<Supplier>()
-				.Columns(c=>c
-						.DistinctBy(x=>x.Id)
-						.Add(x=>x.CompanyName))
+				.Columns(c=>c.Sum(x=>x.Id).Add(x=>x.CompanyName))
 				.ToResult<int>().First();
 
 			Console.WriteLine(result);

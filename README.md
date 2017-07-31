@@ -112,6 +112,15 @@ var productOfSuppliersInStockholm = conn.Select<Product>()
   .ToResult();
 
 ```
+*Select with Aggregated function*
+``` csharp
+var suppliersInStockholm = conn.Select<Supplier>()
+  .Columns(c => c.Count(c=>c.Id).All())
+  .Where(x=>x.Column(c=>c.City).Contains("Stockholm"))
+  .ToResult();
+
+```
+
 **There are more options with complex and easy joins** *Please use and find it out*
 
 *To insert data*
