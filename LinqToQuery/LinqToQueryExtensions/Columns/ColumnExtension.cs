@@ -13,25 +13,36 @@ namespace LinqToQueryExtensions.Columns
 
 		internal static string GetSelect(this Column type)
 		{
+			var column = $" {type.TableAlias}.{type.ColumnName}";
 			switch (type.AggregationMethod)
 			{
 				case AggregationMethods.SUM:
-					return $"SUM({type.TableAlias}.{type.ColumnName})";
+					column = $"SUM({type.TableAlias}.{type.ColumnName})";
+					break;
 				case AggregationMethods.MIN:
-					return $"MIN({type.TableAlias}.{type.ColumnName})";
+					column = $"MIN({type.TableAlias}.{type.ColumnName})";
+					break;
 				case AggregationMethods.MAX:
-					return $"MAX({type.TableAlias}.{type.ColumnName})";
+					column = $"MAX({type.TableAlias}.{type.ColumnName})";
+					break;
 				case AggregationMethods.AVG:
-					return $"AVG({type.TableAlias}.{type.ColumnName})";
+					column = $"AVG({type.TableAlias}.{type.ColumnName})";
+					break;
 				case AggregationMethods.COUNT:
-					return $"COUNT({type.TableAlias}.{type.ColumnName})";
+					column = $"COUNT({type.TableAlias}.{type.ColumnName})";
+					break;
+			}
+			if (type.HasDistinctBy)
+			{
+				column = $" distinct({column})";
 			}
 
-			if (string.IsNullOrWhiteSpace(type.ColumnAlias))
+			if (string.IsNullOrWhiteSpace(type.ColumnAlias) == false)
 			{
-				return $" {type.TableAlias}.{type.ColumnName}";
+				column = $" {column} AS {type.ColumnAlias}";
 			}
-			return $" {type.TableAlias}.{type.ColumnName} AS {type.ColumnAlias}";
+			
+			return column;
 		}
 
 		internal static string GetJoin(this Column type)

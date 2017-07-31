@@ -30,5 +30,7 @@ namespace LinqToQueryExtensions.Columns
 		public OrderByDirection OrderBy { get; set; }
 		public object Value { get; set; }
 		public Column JoinWithColumn { get; set; }
+		public string DistinctBy { get; set; }
+		public bool HasDistinctBy => string.IsNullOrWhiteSpace(DistinctBy) == false;
 	}
 }

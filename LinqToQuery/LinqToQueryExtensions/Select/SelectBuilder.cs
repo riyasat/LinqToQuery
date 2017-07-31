@@ -93,27 +93,7 @@ namespace LinqToQueryExtensions.Select
 			return select;
 		}
 
-		private string BuildGroupBy()
-		{
-			var groupBy = " GROUP BY ";
-			var groupByColumns = "";
-			if (SelectColumns.Any(x => x.AggregationMethod != AggregationMethods.NONE))
-			{
-				foreach (var selectedColumn in SelectColumns.Where(x => x.AggregationMethod == AggregationMethods.NONE))
-				{
-					if (groupByColumns.Length > 0)
-					{
-						groupByColumns += ",";
-					}
-					groupByColumns += $"{selectedColumn.TableAlias}.{selectedColumn.ColumnName}";
-				}
-			}
-			if (groupByColumns.Length > 0)
-			{
-				return $" GROUP BY {groupByColumns}";
-			}
-			return null;
-		}
+		
 
 		public IEnumerable<TModel> ToResult()
 		{
@@ -189,7 +169,7 @@ namespace LinqToQueryExtensions.Select
 			if (SelectColumns.Any() == false) throw new Exception("There are no columns to Select, Please check your linq");
 			var tableAttribute = typeof(TModel).GetCustomAttribute<TableAttribute>();
 
-			foreach (var selectColumn in SelectColumns)
+			foreach (var selectColumn in SelectColumns.OrderByDescending(x=>x.HasDistinctBy))
 			{
 				if (string.IsNullOrWhiteSpace(query) == false) query += ",";
 
@@ -260,6 +240,27 @@ namespace LinqToQueryExtensions.Select
 				query += joinedColumn.GetJoin();
 			}
 			return query;
+		}
+		internal string BuildGroupBy()
+		{
+			var groupBy = " GROUP BY ";
+			var groupByColumns = "";
+			if (SelectColumns.Any(x => x.AggregationMethod != AggregationMethods.NONE))
+			{
+				foreach (var selectedColumn in SelectColumns.Where(x => x.AggregationMethod == AggregationMethods.NONE))
+				{
+					if (groupByColumns.Length > 0)
+					{
+						groupByColumns += ",";
+					}
+					groupByColumns += $"{selectedColumn.TableAlias}.{selectedColumn.ColumnName}";
+				}
+			}
+			if (groupByColumns.Length > 0)
+			{
+				return $" GROUP BY {groupByColumns}";
+			}
+			return null;
 		}
 	}
 }

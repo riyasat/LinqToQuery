@@ -93,6 +93,34 @@ namespace LinqToQueryExtensions.Base
 
 		}
 
+		public BaseSelect<TModel> DistinctBy<TJoin>(Expression<Func<TJoin, object>> expression)
+		{
+			var colName = expression.GetMemberInfo();
+
+			if (Columns.Any(x => x.HasDistinctBy))
+			{
+				throw new Exception("There is already a distinct by column added to the query. You can only add one distinct by Column");
+			}
+			var column = GenerateSelectColumn<TJoin>(colName);
+			column.DistinctBy = colName;
+			Columns.Add(column);
+			return this;
+		}
+
+		public BaseSelect<TModel> DistinctBy(Expression<Func<TModel, object>> expression)
+		{
+			var colName = expression.GetMemberInfo();
+
+			if (Columns.Any(x => x.HasDistinctBy))
+			{
+				throw new Exception("There is already a distinct by column added to the query. You can only add one distinct by Column");
+			}
+			var column = GenerateSelectColumn<TModel>(colName);
+			column.DistinctBy = colName;
+			Columns.Add(column);
+			return this;
+		}
+
 		public BaseSelect<TModel> Sum<TJoin>(Expression<Func<TJoin, object>> expression)
 		{
 			var colName = expression.GetMemberInfo();
