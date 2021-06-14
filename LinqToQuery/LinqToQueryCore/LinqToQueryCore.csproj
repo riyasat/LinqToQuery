@@ -1,0 +1,18 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <PackageId>LinqToQueryCoreDapper</PackageId>
+    <Version>0.0.1</Version>
+    <Authors>Riyasat Ali</Authors>
+    <Company>Riy Technologies</Company>
+    <Product>Linq To Query Core for Dapper</Product>
+    <Description>Fluent Linq to query</Description>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Dapper" Version="2.0.90" />
+    <PackageReference Include="System.Data.SqlClient" Version="4.8.2" />
+  </ItemGroup>
+
+</Project>
