@@ -5,7 +5,7 @@ The aim of the project is to create SQL queries via LINQ. Specifically for Dappe
 ## Prerequisite
 ``` csharp
 using System.ComponentModel.DataAnnotaitions;
-using System.Data.SqlConnection;
+using Microsoft.Data.SQLClient;
 using Dapper; //(required when you need to fetch results)
 
 ``` 
