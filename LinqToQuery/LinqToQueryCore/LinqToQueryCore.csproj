@@ -2,17 +2,32 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
-    <PackageId>LinqToQueryCoreDapper</PackageId>
-    <Version>0.0.1</Version>
+    <PackageId>DapperCoreLinqToQuery</PackageId>
+    <Version>0.0.2</Version>
     <Authors>Riyasat Ali</Authors>
     <Company>Riy Technologies</Company>
-    <Product>Linq To Query Core for Dapper</Product>
-    <Description>Fluent Linq to query</Description>
+    <Product>Dapper Core Linq To Query</Product>
+    <Description>Fluently Build Linq Queries with minimal hand coded quries.</Description>
+    <PackageProjectUrl>https://github.com/riyasat/LinqToQuery</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/riyasat/LinqToQuery.git</RepositoryUrl>
+    <RepositoryType>GIT</RepositoryType>
+    <PackageTags>Dapper Linq to Query Extension Methods</PackageTags>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
+    <PackageLicenseFile>license.md</PackageLicenseFile>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="Dapper" Version="2.0.90" />
-    <PackageReference Include="System.Data.SqlClient" Version="4.8.2" />
+    <PackageReference Include="System.ComponentModel.Annotations" Version="4.7.0" />
+    <PackageReference Include="System.Data.SqlClient" Version="4.4.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="..\..\license.md">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
   </ItemGroup>
 
 </Project>
